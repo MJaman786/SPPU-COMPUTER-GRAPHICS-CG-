@@ -1,0 +1,77 @@
+#include <iostream>
+#include <GL/glut.h> // Include the GLUT header file
+
+using namespace std;
+
+// Define the window size
+const int WINDOW_WIDTH = 800;
+const int WINDOW_HEIGHT = 600;
+
+// Define the line endpoints
+int x1, y1, x2, y2;
+
+// Initialize OpenGL
+void init() {
+    glClearColor(0.0, 0.0, 0.0, 1.0); // Set the clear color to black
+    glMatrixMode(GL_PROJECTION); // Set the matrix mode to projection
+    glLoadIdentity(); // Load the identity matrix
+    gluOrtho2D(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT); // Set the viewing area
+}
+
+// Draw the line using DDA algorithm
+void drawLineDDA() {
+    glClear(GL_COLOR_BUFFER_BIT); // Clear the screen
+
+    float dx = x2 - x1;
+    float dy = y2 - y1;
+    float steps;
+
+    if (abs(dx) > abs(dy)) {
+        steps = abs(dx);
+    } else {
+        steps = abs(dy);
+    }
+
+    float x_increment = dx / steps;
+    float y_increment = dy / steps;
+
+    float x = x1;
+    float y = y1;
+
+    glBegin(GL_POINTS); // Start drawing points
+
+    for (int i = 0; i < steps; i++) {
+        glVertex2i(x, y); // Draw a point
+        x += x_increment;
+        y += y_increment;
+    }
+
+    glEnd(); // End drawing points
+
+    glFlush(); // Flush the drawing commands
+}
+
+// Handle the display event
+void display() {
+    drawLineDDA(); // Draw the line using DDA algorithm
+}
+
+int main(int argc, char** argv) {
+    // Prompt the user to input the line endpoints
+    cout << "Enter the first point (x1, y1): ";
+    cin >> x1 >> y1;
+
+    cout << "Enter the second point (x2, y2): ";
+    cin >> x2 >> y2;
+
+    // Initialize GLUT
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); // Set the display mode
+    glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT); // Set the window size
+    glutCreateWindow("DDA Line Drawing Algorithm"); // Set the window title
+    init(); // Initialize OpenGL
+    glutDisplayFunc(display); // Set the display function
+    glutMainLoop(); // Enter the main loop
+
+    return 0;
+}
