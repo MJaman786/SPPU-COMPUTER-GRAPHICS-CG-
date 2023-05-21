@@ -56,7 +56,7 @@ void mouse(int button, int state, int x, int y){
 		int xi = x;
 		int yi = 720 - y;
 		
-		float fillcolor 	[] = {1.0,0.0,0.0};
+		float fillcolor     [] = {1.0,0.0,0.0};
 		float interiorcolor [] = {1.0,1.0,1.0};
 		
 		floodfill(xi,xi,fillcolor,interiorcolor);
