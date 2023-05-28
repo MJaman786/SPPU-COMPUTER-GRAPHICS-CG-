@@ -3,10 +3,8 @@ use this commands for running the command in terminal
 
 for example your file name is DDA then:
 
-1.To compile your program 
-    use g++ DDA.cpp -o DDA -lglut - lGLU -lGL
+1.To compile your program use g++ DDA.cpp -o DDA -lglut - lGLU -lGL
 
-2.To exicute your program
-    use ./DDA
+2.To exicute your program use ./DDA
    
  Done !
